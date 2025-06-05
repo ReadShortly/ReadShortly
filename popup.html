@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Read Shortly by CSBD</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;700&family=Hind+Siliguri:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Sans+Bengali:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0070f3;
+      --primary-hover: #0060df;
+      --accent-color: #ff4081;
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --text-secondary: #767676;
+      --border-color: #e8e8e8;
+      --card-bg: #f9fafb;
+      --shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+      --shadow-small: rgba(0, 0, 0, 0.05) 0px 2px 4px;
+      --transition: all 0.2s ease;
+      --content-padding: 20px;
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+    
+    body.dark-mode {
+      --primary-color: #3d9aff;
+      --primary-hover: #5dadff;
+      --accent-color: #ff5c8d;
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+      --text-secondary: #a0a0a0;
+      --border-color: #333333;
+      --card-bg: #1e1e1e;
+      --shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
+      --shadow-small: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      width: 420px;
+      padding: 0;
+      font-family: 'Merriweather Sans', 'Hind Siliguri', 'Noto Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: var(--transition);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    h2, h3, h4 {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      font-family: 'Merriweather Sans', 'Hind Siliguri', 'Noto Sans', sans-serif;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 16px var(--content-padding);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .branding {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .logo {
+      width: 24px;
+      height: 24px;
+      background-color: white;
+      border-radius: 6px;
+    }
+    
+    .content-area {
+      padding: 20px var(--content-padding);
+    }
+    
+    /* Header buttons */
+    .header-btn {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .header-btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+    
+    .toolbar {
+      display: flex;
+      gap: 8px;
+    }
+    
+    /* Modern tab design */
+    .tab-container {
+      display: flex;
+      background-color: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      position: relative;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-small);
+    }
+    
+    .tab {
+      flex: 1;
+      padding: 10px 5px;
+      cursor: pointer;
+      text-align: center;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      transition: var(--transition);
+      color: var(--text-color);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .tab.active {
+      color: white;
+      font-weight: 500;
+    }
+    
+    .tab-slider {
+      position: absolute;
+      height: calc(100% - 8px);
+      background-color: var(--primary-color);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      top: 4px;
+      left: 4px;
+      bottom: 4px;
+      width: calc(33.33% - 3px);
+    }
+    
+    .content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .content.active {
+      display: block;
+    }
+    
+    /* Button styling */
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      width: 100%;
+      margin: 10px 0;
+      font-family: inherit;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: var(--shadow-small);
+      text-transform: none;
+      font-size: 14px;
+      letter-spacing: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 13px;
+      border-radius: var(--radius-sm);
+      width: auto;
+      height: 32px;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--card-bg);
+      transform: translateY(-2px);
+    }
+    
+    /* Input elements */
+    textarea, select, button, input {
+      font-family: 'Merriweather Sans', 'Hind Siliguri', 'Noto Sans', sans-serif;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      resize: vertical;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: var(--transition);
+    }
+    
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+    }
+    
+    /* Settings panel */
+    .settings-panel {
+      padding: 20px;
+      background-color: var(--card-bg);
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-small);
+      animation: slideIn 0.3s;
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-color);
+    }
+    
+    select, input[type="range"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    
+    select:focus, input[type="range"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+    }
+    
+    .range-with-value {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .range-value {
+      min-width: 30px;
+      text-align: center;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: var(--radius-sm);
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    /* Toggle switch */
+    .toggle-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 22px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .3s;
+      border-radius: 22px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--primary-color);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+    
+    /* Summary styling */
+    .summary-container {
+      position: relative;
+      margin-top: 20px;
+    }
+    
+    #summary {
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 14px;
+      font-weight: 400;
+      background-color: var(--card-bg);
+      line-height: 1.6;
+      white-space: pre-line;
+      box-shadow: var(--shadow-small);
+      margin: 0;
+      font-family: 'Merriweather Sans', 'Hind Siliguri', 'Noto Sans', sans-serif;
+    }
+    
+    /* Language-specific styling */
+    .lang-bn #summary {
+      font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+      line-height: 1.8;
+    }
+    
+    .lang-ar #summary, .lang-ar .summary-type {
+      font-family: 'Noto Sans Arabic', 'Noto Sans', sans-serif;
+      direction: rtl;
+    }
+    
+    .lang-zh #summary {
+      font-family: 'Noto Sans SC', 'Noto Sans', sans-serif;
+    }
+    
+    .lang-hi #summary {
+      font-family: 'Noto Sans Devanagari', 'Noto Sans', sans-serif;
+    }
+    
+    /* Styling for bullet points with arrows */
+    #summary:contains("→") {
+      padding-left: 5px;
+    }
+    
+    #summary:contains("→") p {
+      margin-bottom: 8px;
+    }
+    
+    /* Translation styles */
+    .translation-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    
+    .summary-type.lang-bn {
+      background: linear-gradient(135deg, var(--primary-color), #006A4E);
+    }
+    
+    .summary-type.lang-es {
+      background: linear-gradient(135deg, var(--primary-color), #F1BF00);
+    }
+    
+    .summary-type.lang-fr {
+      background: linear-gradient(135deg, var(--primary-color), #ED2939);
+    }
+    
+    .summary-type.lang-zh {
+      background: linear-gradient(135deg, var(--primary-color), #DE2910);
+    }
+    
+    .summary-type.lang-hi {
+      background: linear-gradient(135deg, var(--primary-color), #FF9933);
+    }
+    
+    /* Summary type badge */
+    .summary-type {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    
+    /* Language toggle button */
+    .language-toggle {
+      background-color: var(--card-bg) !important;
+      color: var(--text-color) !important;
+      border: 1px solid var(--border-color) !important;
+      padding: 4px 12px !important;
+      margin: 0 0 15px 10px !important;
+      font-size: 12px !important;
+      width: auto !important;
+      box-shadow: none !important;
+      display: inline-flex !important;
+      transition: all 0.2s ease;
+    }
+    
+    .language-toggle:hover {
+      background-color: var(--primary-color) !important;
+      color: white !important;
+      transform: translateY(0) !important;
+    }
+    
+    .language-toggle .toggle-text {
+      display: inline-block;
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    /* Language classes for proper font rendering */
+    .lang-bn .summary-type {
+      background: linear-gradient(135deg, var(--primary-color), #006A4E);
+    }
+    
+    .lang-es .summary-type {
+      background: linear-gradient(135deg, var(--primary-color), #F1BF00);
+    }
+    
+    .lang-fr .summary-type {
+      background: linear-gradient(135deg, var(--primary-color), #ED2939);
+    }
+    
+    .lang-zh .summary-type {
+      background: linear-gradient(135deg, var(--primary-color), #DE2910);
+    }
+    
+    .lang-hi .summary-type {
+      background: linear-gradient(135deg, var(--primary-color), #FF9933);
+    }
+    
+    .copy-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      opacity: 0.9;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .copy-btn:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    
+    /* History items */
+    .history-item {
+      padding: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      background-color: var(--card-bg);
+      transition: var(--transition);
+      box-shadow: var(--shadow-small);
+    }
+    
+    .history-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    .history-title {
+      font-weight: 500;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--primary-color);
+    }
+    
+    .history-date {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    
+    .history-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    
+    /* Loader */
+    .loader {
+      width: 36px;
+      height: 36px;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 30px auto;
+      display: none;
+    }
+    
+    body.dark-mode .loader {
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Privacy notice */
+    .privacy-notice {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 20px;
+      text-align: center;
+      background-color: var(--card-bg);
+      padding: 12px;
+      border-radius: var(--radius-md);
+    }
+
+    /* Icon classes for buttons */
+    .icon {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Empty state styling */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      fill: var(--text-secondary);
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: var(--text-color);
+    }
+
+    .empty-state p {
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="branding">
+      <div class="logo"></div>
+      <h2>Read Shortly</h2>
+    </div>
+    <div class="toolbar">
+      <button id="darkModeBtn" class="header-btn" title="Toggle Dark Mode">Theme: Dark</button>
+      <button id="settingsBtn" class="header-btn" title="Settings">Settings</button>
+    </div>
+  </div>
+  
+  <div class="content-area">
+    <div id="settings-panel" class="settings-panel" style="display: none;">
+      <div class="form-group">
+        <label for="summaryStyle">Summary Style</label>
+        <select id="summaryStyle">
+          <option value="concise">Concise (1-2 paragraphs)</option>
+          <option value="detailed">Detailed (3-4 paragraphs)</option>
+          <option value="bullet">Bullet Points</option>
+          <option value="threeLines">Three Lines Summary</option>
+          <option value="simple">Simple Language</option>
+          <option value="eli5">Explain Like I'm 5</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="lengthSlider">Summary Length</label>
+        <div class="range-with-value">
+          <input type="range" id="lengthSlider" min="1" max="5" value="3" step="1">
+          <span id="lengthValue" class="range-value">3</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="targetLanguage">Translation Language</label>
+        <select id="targetLanguage" style="margin-bottom: 8px;">
+          <option value="none">No translation</option>
+          <option value="en">English</option>
+          <option value="bn">Bengali (বাংলা)</option>
+          <option value="es">Spanish (Español)</option>
+          <option value="fr">French (Français)</option>
+          <option value="de">German (Deutsch)</option>
+          <option value="zh">Chinese (中文)</option>
+          <option value="hi">Hindi (हिन्दी)</option>
+          <option value="ar">Arabic (العربية)</option>
+          <option value="ru">Russian (Русский)</option>
+        </select>
+        <div class="translation-note">Select a language to translate the generated summary</div>
+      </div>
+      
+      <div class="toggle-group">
+        <span>Auto-save summaries</span>
+        <label class="switch">
+          <input type="checkbox" id="autoSaveToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <button id="saveSettingsBtn" class="btn">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+        </svg>
+        Apply Settings
+      </button>
+    </div>
+    
+    <div class="tab-container">
+      <div class="tab active" data-tab="page">Page Content</div>
+      <div class="tab" data-tab="input">Your Text</div>
+      <div class="tab" data-tab="history">History</div>
+      <div class="tab-slider"></div>
+    </div>
+    
+    <div id="page-content" class="content active">
+      <button id="summarizeBtn" class="btn">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"/>
+        </svg>
+        Summarize This Page
+      </button>
+    </div>
+    
+    <div id="input-content" class="content">
+      <textarea id="userText" placeholder="Paste the text you want to summarize here..."></textarea>
+      <button id="summarizeTextBtn" class="btn">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M14 10H2v2h12v-2zm0-4H2v2h12V6zm4 8v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM2 16h8v-2H2v2z"/>
+        </svg>
+        Summarize Text
+      </button>
+    </div>
+    
+    <div id="history-content" class="content">
+      <div id="history-list">
+        <!-- History items will be populated here -->
+        <div class="empty-state" id="history-empty" style="display: none;">
+          <svg viewBox="0 0 24 24">
+            <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+          </svg>
+          <h3>No History Yet</h3>
+          <p>Summaries you create will appear here</p>
+        </div>
+      </div>
+      <button id="clearHistoryBtn" class="btn btn-outline">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+        </svg>
+        Clear History
+      </button>
+    </div>
+    
+    <div class="loader" id="loader"></div>
+    
+    <div class="summary-container">
+      <div id="summary"></div>
+      <button id="copyBtn" class="copy-btn" style="display: none;">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+        </svg>
+        Copy
+      </button>
+    </div>
+    
+    <div class="privacy-notice">
+      <p>No data is saved in our database. All text processing happens directly through the Google Gemini API.</p>
+    </div>
+  </div>
+  
+  <script src="config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html> 

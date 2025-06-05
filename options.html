@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Read Shortly by CSBD - Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1877f2;
+      --primary-hover: #166fe5;
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --border-color: #dddddd;
+      --card-bg: #f9f9f9;
+    }
+    
+    body.dark-mode {
+      --primary-color: #2d88ff;
+      --primary-hover: #3b91ff;
+      --bg-color: #1c1c1c;
+      --text-color: #f0f0f0;
+      --border-color: #444444;
+      --card-bg: #2a2a2a;
+    }
+    
+    body {
+      width: 600px;
+      padding: 30px;
+      font-family: 'Merriweather Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      margin: 0 auto;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    h2 {
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
+    
+    h3 {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-top: 0;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    input {
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      width: 100%;
+      font-family: 'Merriweather Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      box-sizing: border-box;
+    }
+    
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+    
+    .status {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+    
+    .success {
+      background-color: #e6f7e6;
+      color: #1e7f1e;
+    }
+    
+    .error {
+      background-color: #f7e6e6;
+      color: #7f1e1e;
+    }
+    
+    .privacy-section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .privacy-notice {
+      background-color: var(--card-bg);
+      padding: 15px;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    
+    .card {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    select, input[type="range"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+    
+    .range-with-value {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .range-value {
+      min-width: 30px;
+      text-align: center;
+    }
+    
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--text-color);
+      padding: 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    .icon-btn:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .3s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--primary-color);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .toggle-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .shortcut-info {
+      background-color: var(--card-bg);
+      padding: 10px 15px;
+      border-radius: 4px;
+      display: inline-block;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    
+    .kbd {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      box-shadow: 0 1px 1px rgba(0,0,0,.2);
+      padding: 2px 5px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>Read Shortly by CSBD Settings</h2>
+    <button id="darkModeBtn" class="icon-btn" title="Toggle Dark Mode">🌙</button>
+  </div>
+  
+  <div class="container">
+    <div class="card">
+      <h3>API Configuration</h3>
+      <div class="form-group">
+        <label for="apiKey">Gemini API Key:</label>
+        <input type="text" id="apiKey" placeholder="Enter your Gemini API key">
+        <p>The API key is used to access the Gemini AI for text summarization.</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Summary Preferences</h3>
+      <div class="form-group">
+        <label for="summaryStyle">Summary Style:</label>
+        <select id="summaryStyle">
+          <option value="concise">Concise (1-2 paragraphs)</option>
+          <option value="detailed">Detailed (3-4 paragraphs)</option>
+          <option value="bullet">Bullet Points</option>
+          <option value="threeLines">Three Lines Summary</option>
+          <option value="simple">Simple Language</option>
+          <option value="eli5">Explain Like I'm 5</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="lengthSlider">Summary Length:</label>
+        <div class="range-with-value">
+          <input type="range" id="lengthSlider" min="1" max="5" value="3" step="1">
+          <span id="lengthValue" class="range-value">3</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="targetLanguage">Auto-translate summaries to:</label>
+        <select id="targetLanguage">
+          <option value="none">No translation</option>
+          <option value="en">English</option>
+          <option value="bn">Bengali (বাংলা)</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="zh">Chinese</option>
+          <option value="hi">Hindi</option>
+          <option value="ar">Arabic</option>
+          <option value="ru">Russian</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Personalization</h3>
+      <div class="toggle-group">
+        <span>Dark Mode</span>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="toggle-group">
+        <span>Auto-save summaries to history</span>
+        <label class="switch">
+          <input type="checkbox" id="autoSaveToggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label>Keyboard Shortcuts:</label>
+        <div class="shortcut-info">
+          <div><span class="kbd">Alt</span> + <span class="kbd">R</span> - Open Read Shortly</div>
+          <div><span class="kbd">Alt</span> + <span class="kbd">S</span> - Summarize current page</div>
+          <p>On Mac, use <span class="kbd">Command</span> instead of <span class="kbd">Alt</span></p>
+        </div>
+      </div>
+    </div>
+    
+    <button id="saveBtn">Save All Settings</button>
+    <div id="status" class="status"></div>
+    
+    <div class="privacy-section">
+      <h3>Privacy Information</h3>
+      <div class="privacy-notice">
+        <p><strong>Your data privacy is important to us.</strong></p>
+        <p>Read Shortly by CSBD does not save or store any of your content or summarized text in our database. All text processing happens directly through the Google Gemini API.</p>
+        <p>When you use this extension, the text you want summarized is sent directly to Google's Gemini API for processing and is not stored by our extension.</p>
+        <p>Your summary history is stored locally in your browser and can be cleared at any time.</p>
+      </div>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html> 

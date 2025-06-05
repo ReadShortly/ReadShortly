@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Icon Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .icon-container {
+      margin-bottom: 20px;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin: 10px 0;
+    }
+    a {
+      display: block;
+      margin: 10px 0;
+    }
+    .instructions {
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Icon Generator for Read Shortly Extension</h1>
+  
+  <div class="instructions">
+    <h2>Instructions:</h2>
+    <ol>
+      <li>Click each "Download" link to save the corresponding PNG icon</li>
+      <li>Save them in the "icons" folder with the exact names shown</li>
+    </ol>
+  </div>
+  
+  <div class="icon-container">
+    <h3>16x16 Icon (save as icon16.png)</h3>
+    <canvas id="icon16" width="16" height="16"></canvas>
+    <a id="download16" href="#">Download icon16.png</a>
+  </div>
+  
+  <div class="icon-container">
+    <h3>48x48 Icon (save as icon48.png)</h3>
+    <canvas id="icon48" width="48" height="48"></canvas>
+    <a id="download48" href="#">Download icon48.png</a>
+  </div>
+  
+  <div class="icon-container">
+    <h3>128x128 Icon (save as icon128.png)</h3>
+    <canvas id="icon128" width="128" height="128"></canvas>
+    <a id="download128" href="#">Download icon128.png</a>
+  </div>
+  
+  <script>
+    // Helper function to draw a rounded rectangle
+    function drawRoundedRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+  
+    // Function to draw an icon
+    function drawIcon(canvasId, size) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      
+      // Background
+      ctx.fillStyle = '#1877F2'; // Facebook blue
+      drawRoundedRect(ctx, 0, 0, size, size, size / 8);
+      ctx.fill();
+      
+      // Text "RS"
+      ctx.fillStyle = 'white';
+      ctx.font = `bold ${size / 2}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('RS', size / 2, size / 2);
+      
+      // Only add checkmark if icon is big enough
+      if (size >= 48) {
+        // Checkmark
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = size / 20;
+        ctx.beginPath();
+        ctx.moveTo(size * 0.25, size * 0.6);
+        ctx.lineTo(size * 0.4, size * 0.75);
+        ctx.lineTo(size * 0.75, size * 0.35);
+        ctx.stroke();
+      }
+      
+      // Set up download link
+      const downloadLink = document.getElementById(`download${size}`);
+      downloadLink.addEventListener('click', function() {
+        const dataURL = canvas.toDataURL('image/png');
+        downloadLink.href = dataURL;
+        downloadLink.download = `icon${size}.png`;
+      });
+    }
+    
+    // Draw all icons
+    drawIcon('icon16', 16);
+    drawIcon('icon48', 48);
+    drawIcon('icon128', 128);
+  </script>
+</body>
+</html> 
