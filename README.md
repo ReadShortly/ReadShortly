@@ -1,6 +1,6 @@
 
 # 📘 Read Shortly – Summarize Smarter, Read Faster  
-*A Chrome Extension by CSBD*
+*A Chrome Extension*
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Built with Gemini AI](https://img.shields.io/badge/Gemini%20API-Powered-blue)](https://ai.google.dev/gemini)
@@ -15,11 +15,11 @@
 - 📋 **Paste your own text** to summarize offline or copied content
 - 🧠 **Smart content detection** – auto-detects main page content or allows manual text selection
 - 📌 **Floating action button (FAB)** on any webpage for quick access
-- 🛡️ **Use your own Gemini API key** for private and secure requests
+- 🛡️ **Default Gemini API key available**, or use your own key if usage limits are reached
 - 🌍 **Translate summaries** into your preferred language
 - 🎨 **Modern UI/UX** with Merriweather Sans and Dark Mode support
 - 🧾 **Customizable summary styles**: concise, detailed, or bullet points
-- ❌ **No data stored** – summaries are processed client-side through Gemini API only
+- ❌ **No data stored on any server** – all processing is local and cached in your browser
 
 ---
 
@@ -70,6 +70,8 @@
 
 ### 🔑 Gemini API Key
 
+By default, the extension uses a shared Gemini API key to get you started. If you encounter usage limits, you can provide your own API key.
+
 You can configure your API key in **three ways**:
 
 #### 1. 🔧 In the extension UI:
@@ -102,7 +104,7 @@ You can configure your API key in **three ways**:
 - 🧠 [Google Gemini 2.0 Flash API](https://ai.google.dev/gemini)
 - 📜 Vanilla JavaScript + Chrome Extension APIs
 - 🎨 Merriweather Sans via Google Fonts
-- 💾 LocalStorage for secure, private settings
+- 💾 LocalStorage and browser cache for secure, private settings
 - 🧩 Content Scripts + Messaging APIs for DOM interaction
 
 ---
@@ -111,10 +113,10 @@ You can configure your API key in **three ways**:
 
 - 🔒 **No text, user data, or summaries are stored** on any server.
 - 📡 Summarization requests are sent directly to Gemini's API.
-- 🔐 Your API key and settings are stored **locally in your browser**.
-- 🧭 No analytics, cookies, or tracking scripts are used.
+- 🔐 All data is cached in your browser using **Chrome's local storage**.
+- 🧭 We do not collect analytics, cookies, or any usage statistics.
 
-> **Your data never leaves your browser except to Gemini API.**
+> **Your data stays on your browser – nothing is sent to our site.**
 
 ---
 
@@ -137,6 +139,8 @@ We welcome contributions and suggestions!
 3. Commit your changes
 4. Open a Pull Request
 
+📧 Contact us at **connect@hamimifty.tech**
+
 ---
 
 ## 📜 License
@@ -145,9 +149,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🗣️ Contact & Credits
+## 🗣️ Credits
 
-- 🧑‍💻 Developed by CSBD
 - 🌐 [Visit Repository](https://github.com/ReadShortly/Read-Shortly)
 
 ---
