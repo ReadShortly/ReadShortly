@@ -1,84 +1,155 @@
-# Read Shortly by CSBD
 
-A Chrome extension that helps you quickly summarize long Facebook posts and articles using Google's Gemini AI.
+# 📘 Read Shortly – Summarize Smarter, Read Faster  
+*A Chrome Extension by CSBD*
 
-## Features
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Built with Gemini AI](https://img.shields.io/badge/Gemini%20API-Powered-blue)](https://ai.google.dev/gemini)
 
-- Summarize long Facebook posts or articles with one click
-- Directly paste text into the extension to summarize without having to be on the source page
-- Select specific text to summarize or let the extension detect the main content
-- Floating button for easy access on any page
-- Customize with your own Gemini API key
-- Clean, modern UI with Merriweather Sans font
-- No data is saved in our database - all processing happens via the Gemini API
-- Toggle between English and translated summaries
+**Read Shortly** helps you instantly summarize long Facebook posts and articles using **Google's Gemini AI**. Whether you're scanning news, browsing social media, or working through research articles, Read Shortly gives you smart, concise summaries with one click.
 
-## Installation
+---
 
-### From source code:
+## 🚀 Features
 
-1. Download or clone this repository
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" at the top-right
-4. Click "Load unpacked" and select the extension directory
-5. The extension should now be installed in your browser
+- ✅ **One-click summarization** of Facebook posts and online articles
+- 📋 **Paste your own text** to summarize offline or copied content
+- 🧠 **Smart content detection** – auto-detects main page content or allows manual text selection
+- 📌 **Floating action button (FAB)** on any webpage for quick access
+- 🛡️ **Use your own Gemini API key** for private and secure requests
+- 🌍 **Translate summaries** into your preferred language
+- 🎨 **Modern UI/UX** with Merriweather Sans and Dark Mode support
+- 🧾 **Customizable summary styles**: concise, detailed, or bullet points
+- ❌ **No data stored** – summaries are processed client-side through Gemini API only
 
-## Usage
+---
 
-### Summarizing content from a webpage:
-1. Navigate to a Facebook post or article you want to summarize
-2. Click the "Read Shortly" extension icon in your browser toolbar
-3. Select the "Page Content" tab
-4. Click "Summarize This Page" and wait for the summary to appear
-5. Alternatively, select specific text on the page before clicking "Summarize This Page"
+## 🖼️ Demo
 
-### Summarizing text directly:
-1. Click the "Read Shortly" extension icon
-2. Select the "Your Text" tab
-3. Paste the text you want to summarize
-4. Click "Summarize Text" button
-5. View the generated summary
+> *(Coming soon)*  
+> Add a GIF or screenshot here to showcase the extension in action!
 
-## Configuration
+---
 
-### API Key Setup
-There are three ways to set up your API key:
+## 🛠 Installation
 
-1. **In the extension UI**:
-   - Click the extension icon
-   - Click the "Settings" button
-   - Enter your Gemini API key in the field
-   - Click "Apply Settings"
+### 🔧 From Source:
 
-2. **In the config.js file**:
-   - Open `config.js` in the extension directory
-   - Replace the default API key with your own
-   - Save the file
+1. **Clone or download this repo:**
+   ```bash
+   git clone https://github.com/ReadShortly/Read-Shortly.git
+   ```
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable **Developer mode** (top right)
+4. Click **Load unpacked**
+5. Select the `Read-Shortly` folder
 
-3. **In the extension options**:
-   - Right-click the extension icon and select "Options"
-   - Enter your Gemini API key
-   - Click "Save"
+✅ Done! The extension should now appear in your Chrome toolbar.
 
-### Other Settings
-- Summary style (concise, detailed, bullet points, etc.)
-- Summary length
-- Translation language
-- Theme (light/dark mode)
+---
 
-## Technical Details
+## 💡 How to Use
 
-This extension uses:
-- Google's Gemini 2.0 Flash API for text summarization
-- Content scripts to extract text from web pages
-- Chrome's extension storage for saving settings
-- Merriweather Sans font for a clean reading experience
-- Config.js file for API key management
+### 🔍 To summarize page content:
 
-## Privacy
+1. Visit any **Facebook post**, **news article**, or **blog**
+2. Click the **Read Shortly** icon from the toolbar
+3. Go to the **Page Content** tab
+4. Click **Summarize This Page**
+5. Optionally, highlight a portion of the text before clicking to summarize a specific section
 
-This extension sends text content to Google's Gemini API for processing. No personal data or text content is collected or stored in any database beyond what is necessary for the summarization function. All text processing happens directly through the Google Gemini API.
+### ✂️ To summarize your own text:
 
-## License
+1. Click the **Read Shortly** icon
+2. Select the **Your Text** tab
+3. Paste or type the content you want to summarize
+4. Click **Summarize Text**
 
-MIT License 
+---
+
+## ⚙️ Configuration
+
+### 🔑 Gemini API Key
+
+You can configure your API key in **three ways**:
+
+#### 1. 🔧 In the extension UI:
+- Open the extension → Click **Settings**
+- Paste your **Gemini API key**
+- Click **Apply Settings**
+
+#### 2. 🧑‍💻 In `config.js`:
+- Open `config.js`
+- Replace:
+  ```js
+  const API_KEY = 'YOUR_GEMINI_API_KEY';
+  ```
+- Save the file
+
+#### 3. ⚙️ In Chrome extension options:
+- Right-click the extension icon → Click **Options**
+- Enter your API key → Click **Save**
+
+### 📁 Other Settings
+- Summary style: *Concise*, *Detailed*, *Bullet Points*
+- Summary length: *Short*, *Medium*, *Long*
+- Translation language (optional)
+- Theme: *Light/Dark Mode*
+
+---
+
+## 🧑‍💻 Built With
+
+- 🧠 [Google Gemini 2.0 Flash API](https://ai.google.dev/gemini)
+- 📜 Vanilla JavaScript + Chrome Extension APIs
+- 🎨 Merriweather Sans via Google Fonts
+- 💾 LocalStorage for secure, private settings
+- 🧩 Content Scripts + Messaging APIs for DOM interaction
+
+---
+
+## 🔐 Privacy & Data Handling
+
+- 🔒 **No text, user data, or summaries are stored** on any server.
+- 📡 Summarization requests are sent directly to Gemini's API.
+- 🔐 Your API key and settings are stored **locally in your browser**.
+- 🧭 No analytics, cookies, or tracking scripts are used.
+
+> **Your data never leaves your browser except to Gemini API.**
+
+---
+
+## 📚 Roadmap & Upcoming Features
+
+- 🔜 **Auto-language detection**
+- 🗂️ **Summary history and bookmarks**
+- 🖨️ **Export to PDF / Markdown**
+- 🔊 **Text-to-speech (TTS) summaries**
+- 🔗 **Gemini Pro model support**
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions and suggestions!
+
+1. Fork this repo
+2. Create a new branch: `feature/your-feature-name`
+3. Commit your changes
+4. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 🗣️ Contact & Credits
+
+- 🧑‍💻 Developed by CSBD
+- 🌐 [Visit Repository](https://github.com/ReadShortly/Read-Shortly)
+
+---
+
+**Enjoy Reading — Shortly.**
